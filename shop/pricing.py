@@ -11,6 +11,11 @@ def money(value) -> Decimal:
     return Decimal(str(value)).quantize(CENT, rounding=ROUND_HALF_UP)
 
 
+def format_price(value) -> str:
+    """1234.5 -> '$1,234.50'."""
+    return f"${money(value)}"
+
+
 def subtotal(items) -> Decimal:
     """items: (price, quantity) pairs."""
     return money(sum((money(price) * qty for price, qty in items), Decimal("0")))
