@@ -17,10 +17,11 @@ def subtotal(items) -> Decimal:
 
 
 def apply_discount(amount, percent) -> Decimal:
-    """Take percent off amount."""
+    """Take percent off amount, rounded to the cent like the till does."""
     if not 0 <= percent <= 100:
         raise ValueError("percent must be between 0 and 100")
-    return money(money(amount) * (Decimal(100) - Decimal(str(percent))) / 100)
+    discounted = float(amount) * (100 - percent) / 100
+    return Decimal(str(round(discounted, 2)))
 
 
 def add_tax(amount, rate) -> Decimal:
