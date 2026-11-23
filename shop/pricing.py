@@ -28,6 +28,11 @@ def add_tax(amount, rate) -> Decimal:
     return money(money(amount) * (Decimal(100) + Decimal(str(rate))) / 100)
 
 
+def price_without_tax(gross, rate) -> Decimal:
+    """120.00 at 20 % -> 100.00."""
+    return money(money(gross) * (Decimal(100) - Decimal(str(rate))) / 100)
+
+
 def shipping(amount) -> Decimal:
     """Free from 50.00, a flat 4.99 below."""
     return Decimal("0.00") if money(amount) >= FREE_SHIPPING_FROM else SHIPPING
