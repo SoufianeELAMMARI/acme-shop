@@ -12,5 +12,9 @@ class Inventory:
     def available(self, sku: str) -> int:
         return self.stock.get(sku, 0)
 
+    def reserve(self, sku: str, qty: int) -> None:
+        """Take qty out of stock, or raise OutOfStock."""
+        self.stock[sku] = self.available(sku) - qty
+
     def restock(self, sku: str, qty: int) -> None:
         self.stock[sku] = self.available(sku) + qty
