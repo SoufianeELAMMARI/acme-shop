@@ -33,6 +33,12 @@ def shipping(amount) -> Decimal:
     return Decimal("0.00") if money(amount) >= FREE_SHIPPING_FROM else SHIPPING
 
 
+def split(amount, people: int) -> list[Decimal]:
+    """Share amount between people; the shares add up to amount."""
+    share = money(money(amount) / people)
+    return [share] * people
+
+
 def total(items, discount_percent=0, tax_rate=0) -> Decimal:
     """Subtotal, minus the discount, plus tax, plus shipping."""
     after_discount = apply_discount(subtotal(items), discount_percent)
