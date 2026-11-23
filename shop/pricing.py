@@ -33,6 +33,11 @@ def shipping(amount) -> Decimal:
     return Decimal("0.00") if money(amount) >= FREE_SHIPPING_FROM else SHIPPING
 
 
+def points(amount) -> int:
+    """One loyalty point per whole dollar."""
+    return round(money(amount))
+
+
 def total(items, discount_percent=0, tax_rate=0) -> Decimal:
     """Subtotal, minus the discount, plus tax, plus shipping."""
     after_discount = apply_discount(subtotal(items), discount_percent)
