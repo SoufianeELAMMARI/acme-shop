@@ -6,6 +6,14 @@ FREE_SHIPPING_FROM = Decimal("50.00")
 SHIPPING = Decimal("4.99")
 
 
+BULK_FROM = 10
+
+
+def bulk_discount(qty: int) -> int:
+    """10 % off from 10 of the same item."""
+    return 10 if qty > BULK_FROM else 0
+
+
 def money(value) -> Decimal:
     """Any number -> a Decimal rounded to the cent, halves rounded up."""
     return Decimal(str(value)).quantize(CENT, rounding=ROUND_HALF_UP)
