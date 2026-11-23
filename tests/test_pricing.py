@@ -42,8 +42,12 @@ def test_shipping_below_threshold():
     assert shipping(49.99) == Decimal("4.99")
 
 
-def test_shipping_free_from_50():
-    assert shipping(50) == Decimal("0.00")
+def test_shipping_free_from_60():
+    assert shipping(60) == Decimal("0.00")
+
+
+def test_shipping_paid_at_50():
+    assert shipping(50) == Decimal("4.99")
 
 
 def test_total_small_order():
@@ -52,3 +56,7 @@ def test_total_small_order():
 
 def test_total_with_discount_and_tax():
     assert total([(40, 2)], discount_percent=10, tax_rate=20) == Decimal("86.40")
+
+
+def test_total_with_shipping_at_55():
+    assert total([(55, 1)]) == Decimal("59.99")

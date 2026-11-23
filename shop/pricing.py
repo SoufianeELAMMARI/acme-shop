@@ -2,7 +2,7 @@
 from decimal import ROUND_HALF_UP, Decimal
 
 CENT = Decimal("0.01")
-FREE_SHIPPING_FROM = Decimal("50.00")
+FREE_SHIPPING_FROM = Decimal("60.00")
 SHIPPING = Decimal("4.99")
 
 
@@ -29,8 +29,8 @@ def add_tax(amount, rate) -> Decimal:
 
 
 def shipping(amount) -> Decimal:
-    """Free from 50.00, a flat 4.99 below."""
-    return Decimal("0.00") if money(amount) >= FREE_SHIPPING_FROM else SHIPPING
+    """Free from 60.00, a flat 4.99 below."""
+    return Decimal("0.00") if money(amount) > FREE_SHIPPING_FROM else SHIPPING
 
 
 def total(items, discount_percent=0, tax_rate=0) -> Decimal:
